@@ -1,11 +1,16 @@
+@inject('auth', 'Auth')
+
 <div class="m-top-15 answer lists">
     <div class="header">
         <div class="title"><h4>Jawaban: </h4></div>
+
+        @if($auth::check())
         <div class="edit">
             <button type="button" class="btn btn-warning btn-xs" onclick="editAnswer(this)">
                 <i class="fa fa-pencil"></i>
             </button>
         </div>
+        @endif
 
     </div>
     <div class="body">

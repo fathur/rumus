@@ -1,14 +1,20 @@
+@inject('auth', 'Auth')
+
 @extends('_layout.main')
 
 @section('content')
     <div class="row article">
         <div class="col-md-12">
             <h2>{{$post->title}}</h2>
+
+            @if($auth::check())
             <div class="edit">
                 <a href="{{route('post.edit', $post->id)}}" class="btn">
                     <i class="fa fa-edit"></i> edit
                 </a>
             </div>
+            @endif
+
             <div>
                 {!! $post->parsed_content !!}
             </div>
@@ -20,11 +26,15 @@
     <div class="row examples">
         <div class="col-md-12">
             <h4>Contoh</h4>
+
+            @if($auth::check())
             <div class="new m-bot-15">
                 <a href="{{route('post.example.create', $post->id)}}" class="btn btn-success btn-sm">
                     <i class="fa fa-plus-circle"></i> Buat Contoh
                 </a>
             </div>
+            @endif
+
             <ol>
                 @foreach($post->examples as $example)
                 <li>
@@ -37,9 +47,11 @@
                             <i class="fa fa-check-square-o"></i> Jawaban
                         </a>
 
+                        @if($auth::check())
                         <a href="{{route('post.example.edit', [$post->id, $example->id])}}" class="btn btn-xs btn-warning">
                             <i class="fa fa-pencil"></i> Edit
                         </a>
+                        @endif
 
                         <a href="{{route('post.example.show', [$post->id, $example->id])}}" class="btn btn-xs btn-primary">
                             <i class="fa fa-link"></i>

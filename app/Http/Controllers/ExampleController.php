@@ -36,6 +36,8 @@ class ExampleController extends Controller
      */
     public function create($post)
     {
+        $this->middleware('auth');
+
         $post = Post::with('examples')->find($post);
 
         return view('example.create', compact('post'));
@@ -49,6 +51,8 @@ class ExampleController extends Controller
      */
     public function store($post, Request $request)
     {
+        $this->middleware('auth');
+
         $post = Post::find($post);
 
         $example = $post->examples()->create([
@@ -67,6 +71,8 @@ class ExampleController extends Controller
      */
     public function edit($post, $example)
     {
+        $this->middleware('auth');
+
         $example = Example::find($example);
 
         return view('example.edit', compact('example'));
@@ -81,6 +87,8 @@ class ExampleController extends Controller
      */
     public function update($post, $example, Request $request)
     {
+        $this->middleware('auth');
+
         $example = Example::find($example);
         //$redirect = ($request->has('redirect') AND $request->get('redirect') == true) ? true : false;
 
@@ -139,6 +147,8 @@ class ExampleController extends Controller
 
     public function putAnswer(Request $request)
     {
+        $this->middleware('auth');
+
         $exampleId = $request->get('id');
         $answer = $request->get('content');
 

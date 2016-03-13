@@ -1,8 +1,13 @@
+@inject('auth', 'Auth')
+
+@if($auth::check())
 <div class="sidebar-module">
     <a href="{{route('post.create')}}" class="btn btn-success">
         <i class="fa fa-pencil"></i> New Article
     </a>
 </div>
+@endif
+
 <div class="sidebar-module sidebar-module-inset">
     <h4>About</h4>
     <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>

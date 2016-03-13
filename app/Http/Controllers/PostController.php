@@ -51,11 +51,15 @@ class PostController extends Controller
 
     public function create()
     {
+        $this->middleware('auth');
+
         return view('post.create');
     }
 
     public function store(Request $request)
     {
+        $this->middleware('auth');
+
         $post = Post::create([
             'title' => $request->get('title'),
             'content' => $request->get('content'),
@@ -71,6 +75,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $this->middleware('auth');
+
         $post = Post::find($id);
 
         if(is_null($post))
@@ -87,6 +93,8 @@ class PostController extends Controller
      */
     public function update($id, Request $request)
     {
+        $this->middleware('auth');
+
         $post = Post::find($id);
 
         $post->title = $request->get('title');
