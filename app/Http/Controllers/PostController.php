@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Taxonomy;
 use App\Repositories\Parse;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -32,12 +33,20 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::findBySlug($slug);
+        $taxonomy = Taxonomy::findBySlug($slug);
 
-        if(is_null($post))
-            abort(404);
 
-        return view('post.show', compact('post'));
+        // Pertama check apakah slug ada di category
+        if($taxonomy) {
+            /** @var Taxonomy $taxonomy */
+            return $this->showAsCategoryList($slug, $taxonomy);
+        }
+
+        // Kemudian check jika tidak ada baru cek di post
+        else {
+            return $this->showAsSinglePost($slug);
+        }
+
     }
 
     public function create()
@@ -101,5 +110,30 @@ class PostController extends Controller
 
         return view('post.preview', compact('content','title'));
 
+    }
+
+    /**
+     * @param $slug
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
+    private function showAsCategoryList($slug, Taxonomy $taxonomy)
+    {
+        return view('taxonomy.show')
+            ->with('taxonomy', $taxonomy);
+    }
+
+    /**
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
+    private function showAsSinglePost($slug)
+    {
+        $post = Post::findBySlug($slug);
+
+        if(is_null($post))
+            abort(404);
+
+        return view('post.show', compact('post'));
     }
 }

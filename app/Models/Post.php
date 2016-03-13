@@ -29,4 +29,9 @@ class Post extends Model implements SluggableInterface
     {
         return $this->hasMany(Example::class);
     }
+
+    public function taxonomies()
+    {
+        return $this->belongsToMany(Taxonomy::class);
+    }
 }
