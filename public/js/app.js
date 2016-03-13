@@ -70,4 +70,4 @@ function saveAnswer(e) {
 
 }
 
-$('table').addClass('table');
+$('table').addClass('table table-condensed table-striped');
