@@ -55,8 +55,8 @@
     <div class="container">
         <nav class="blog-nav">
             <a class="blog-nav-item" href="{{url('/')}}">Home</a>
-            <a class="blog-nav-item" href="#">Matematika</a>
-            <a class="blog-nav-item" href="#">Fisika</a>
+            <a class="blog-nav-item" href="{{url('matematika')}}">Matematika</a>
+            <a class="blog-nav-item" href="{{url('fisika')}}">Fisika</a>
         </nav>
     </div>
 </div>
