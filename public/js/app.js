@@ -69,3 +69,5 @@ function saveAnswer(e) {
     });
 
 }
+
+$('table').addClass('table');
