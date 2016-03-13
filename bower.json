@@ -1,0 +1,37 @@
+{
+  "name": "blog",
+  "description": "Blog untuk rumus-rumus sains",
+  "main": "",
+  "authors": [
+    "Fathur Rohman <fathur_rohman17@yahoo.co.id>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "blog",
+    "matematika",
+    "fisika",
+    "kimia",
+    "physic",
+    "math",
+    "rumus"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "font-awesome": "fontawesome#^4.5.0",
+    "bootstrap3-ie10-viewport-bug-workaround": "^1.0.0",
+    "MathJax": "^2.6.1",
+    "bootstrap-markdown": "^2.10.0"
+  }
+}
