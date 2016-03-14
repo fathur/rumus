@@ -17,7 +17,8 @@ class Taxonomy extends Model implements SluggableInterface
 
     public function posts()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(Post::class)
+            ->withTimestamps();
     }
 
     public function scopeCategory($query)

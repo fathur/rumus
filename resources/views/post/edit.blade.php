@@ -42,6 +42,23 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="categories">Categories</label>
+                            {!! Form::select('categories[]', $categories, $selectedCategories, [
+                                'class' => 'form-control', 'id' => 'categories', 'multiple' => 'multiple'
+                            ]) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="tags">Tag</label>
+                            <textarea name="tags" id="tags" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary btn-lg">
                     <i class="fa fa-save"></i> Save
                 </button>
@@ -55,8 +72,20 @@
 </div>
 @stop
 
+@section('styles')
+    <link rel="stylesheet" href="{{asset('components/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('components/jquery.tagsinput/src/jquery.tagsinput.css')}}">
+@stop
+
+@section('scripts')
+    <script src="{{asset('components/select2/dist/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('components/jquery.tagsinput/src/jquery.tagsinput.js')}}"></script>
+@stop
+
 @section('script')
 <script>
+
+
 
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
 
@@ -76,6 +105,9 @@
         });
         //e.relatedTarget // previous active tab
     });
+
+    $('#categories').select2();
+    $('#tags').tagsInput();
 
     $("#content").markdown({
         autofocus:false,

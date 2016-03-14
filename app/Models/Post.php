@@ -32,6 +32,7 @@ class Post extends Model implements SluggableInterface
 
     public function taxonomies()
     {
-        return $this->belongsToMany(Taxonomy::class);
+        return $this->belongsToMany(Taxonomy::class)
+            ->withTimestamps();
     }
 }

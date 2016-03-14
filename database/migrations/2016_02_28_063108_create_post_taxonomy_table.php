@@ -13,7 +13,7 @@ class CreatePostTaxonomyTable extends Migration
     public function up()
     {
         Schema::create('post_taxonomy', function (Blueprint $table) {
-            $table->increments('post_id');
+            $table->unsignedInteger('post_id');
             $table->unsignedInteger('taxonomy_id');
             $table->timestamps();
 

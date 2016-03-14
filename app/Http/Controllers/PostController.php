@@ -53,7 +53,9 @@ class PostController extends Controller
     {
         $this->middleware('auth');
 
-        return view('post.create');
+        $categories = $this->toSelectOptions(Taxonomy::category()->get(), 'id', 'title');
+
+        return view('post.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -65,6 +67,8 @@ class PostController extends Controller
             'content' => $request->get('content'),
         ]);
 
+        $post->taxonomies()->attach($request->get('categories'));
+        
         return redirect()->route('post.slug', $post->slug);
     }
 
@@ -77,12 +81,21 @@ class PostController extends Controller
     {
         $this->middleware('auth');
 
-        $post = Post::find($id);
+        $post = Post::with(['taxonomies' => function ($query) {
+            $query->category();
+        } ])->find($id);
 
         if(is_null($post))
             abort(404);
 
-        return view('post.edit', compact('post'));
+
+        $selectedCategories = [];
+        foreach ($post->taxonomies as $taxonomy)
+            array_push($selectedCategories, $taxonomy->id);
+
+        $categories = $this->toSelectOptions(Taxonomy::category()->get(), 'id', 'title');
+
+        return view('post.edit', compact('post','categories','selectedCategories'));
     }
 
     /**
@@ -100,6 +113,9 @@ class PostController extends Controller
         $post->title = $request->get('title');
         $post->content = $request->get('content');
         $post->save();
+
+        $post->taxonomies()->detach();
+        $post->taxonomies()->attach($request->get('categories'));
 
         return redirect()->route('post.slug', $post->slug);
     }
